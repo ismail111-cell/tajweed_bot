@@ -1,5 +1,5 @@
 import os
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 
 # ТОКЕН вашего бота (тот, что дал BotFather)
@@ -10,7 +10,7 @@ APP_URL = "https://ismail111-cell.github.io/Teacher/"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
-        [InlineKeyboardButton("📚 Открыть приложение Таджвид", web_app={"url": APP_URL})],
+        [InlineKeyboardButton("📚 Открыть приложение Таджвид", web_app=WebAppInfo(url=APP_URL))],
         [InlineKeyboardButton("ℹ️ О боте", callback_data="info")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
