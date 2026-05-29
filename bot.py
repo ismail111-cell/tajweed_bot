@@ -1,17 +1,7 @@
-import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 
-# Настройка логирования
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
-
-# ТОКЕН вашего бота (тот, что дал BotFather)
 TOKEN = "1880295860:AAHBz_lONagjOAnS77ZkrjUywJfoun4yH_8"
-
-# Прямая ссылка на ваш HTML-файл на GitHub Pages
 APP_URL = "https://ismail111-cell.github.io/Teacher/"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -37,23 +27,12 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "Для начала работы просто нажмите кнопку *«Открыть приложение Таджвид»*.\n\n"
             "⚙️ Техническая информация:\n"
             "- Версия: 2.1\n"
-            "- Данные синхронизируются через облачную базу\n"
             "- Поддержка Telegram Mini App",
             parse_mode="Markdown"
         )
 
-async def main():
-    application = Application.builder().token(TOKEN).build()
-    
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CallbackQueryHandler(button_handler))
-    
-    print("🚀 Бот запущен...")
-    
-    await application.initialize()
-    await application.start()
-    await application.updater.start_polling()
-
-if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+if __name__ == '__main__':
+    app = Application.builder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CallbackQueryHandler(button_handler))
+    app.run_polling()
