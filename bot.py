@@ -1,3 +1,4 @@
+import asyncio
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 
@@ -27,12 +28,17 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "Для начала работы просто нажмите кнопку *«Открыть приложение Таджвид»*.\n\n"
             "⚙️ Техническая информация:\n"
             "- Версия: 2.1\n"
+            "- Данные синхронизируются через облачную базу\n"
             "- Поддержка Telegram Mini App",
             parse_mode="Markdown"
         )
 
-if __name__ == '__main__':
+def main():
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
+    print("Бот запущен...")
     app.run_polling()
+
+if __name__ == "__main__":
+    main()
